@@ -1,30 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import './index.css'
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AddQuestion from "./components/AddQuestion";
-import NewRegistrationPage from "./components/NewRegistrationPage";
-import AddAnswer from "./components/AddAnswer";
-import LoginPage from "./components/LoginPage";
-import Home from "./components/Home";
-import PageNotFound from "./components/PageNotFound";
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Register from './auth/Register';
+import Login from "./auth/Login";
+import Store from './app/Store';
+import Quora from "./components/Quora";
 
 
 const App = () => {
+
+  const[login, setLogin]= useState(false)
+  const props = { login: login, setLogin: setLogin };
+
   return (
-    <div className="main">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/registration" element={<NewRegistrationPage />} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/addQuestion" element={<AddQuestion />} />
-          <Route path="/addAnswer" element={<AddAnswer/>} />
-          <Route path="*" element={<PageNotFound/>}/>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-};
+    <>
+    
+    <BrowserRouter>
+          
+           <div className="App">
+           <Store data={props}/>
+            <Routes>
+                 <Route path="/" element={<Login/> }/>
+                 <Route path="/login" element={<Login/>}/>
+                 <Route path="/register" element={<Register/>}/>
+                 <Route path="/quora" element={<Quora/>}/>
+
+                
+            </Routes>
+                
+          </div>
+          
+    </BrowserRouter>
+    </>
+  )
+}
+
 
 export default App;
+
+
